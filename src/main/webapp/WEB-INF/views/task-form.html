@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Công Việc Mới</title>
+</head>
+<body>
+
+<h1>Thêm Công Việc Mới</h1>
+
+<a th:href="@{/tasks}" href="#">← Quay lại danh sách</a>
+
+<br/><br/>
+
+<form th:action="@{/tasks}" th:object="${taskItem}" method="post">
+
+    <table>
+        <tr>
+            <td><label for="title">Tên Công Việc (*)</label></td>
+            <td>
+                <input type="text" id="title" th:field="*{title}" size="40"
+                       placeholder="Nhập tên công việc (ít nhất 5 ký tự)" />
+                <br/>
+                <span th:if="${#fields.hasErrors('title')}"
+                      th:errors="*{title}"
+                      style="color: red;">
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="deadline">Hạn Hoàn Thành (*)</label></td>
+            <td>
+                <input type="date" id="deadline" th:field="*{deadline}" />
+                <br/>
+                <span th:if="${#fields.hasErrors('deadline')}"
+                      th:errors="*{deadline}"
+                      style="color: red;">
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="priority">Mức Độ Ưu Tiên (*)</label></td>
+            <td>
+                <select id="priority" th:field="*{priority}">
+                    <option value="">-- Chọn mức độ ưu tiên --</option>
+                    <option value="HIGH">HIGH - Cao</option>
+                    <option value="MEDIUM">MEDIUM - Trung bình</option>
+                    <option value="LOW">LOW - Thấp</option>
+                </select>
+                <br/>
+                <span th:if="${#fields.hasErrors('priority')}"
+                      th:errors="*{priority}"
+                      style="color: red;">
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">Lưu Công Việc</button>
+                &nbsp;
+                <a th:href="@{/tasks}" href="#">Hủy</a>
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+</body>
+</html>

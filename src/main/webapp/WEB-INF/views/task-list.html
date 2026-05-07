@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Công Việc</title>
+</head>
+<body>
+
+<h1>Danh Sách Công Việc</h1>
+
+<a th:href="@{/tasks/new}" href="#">+ Thêm Công Việc Mới</a>
+
+<br/><br/>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>Mã CV</th>
+        <th>Tên Công Việc</th>
+        <th>Hạn Hoàn Thành</th>
+        <th>Mức Độ Ưu Tiên</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task, iterStat : ${tasks}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${task.id}"></td>
+        <td th:text="${task.title}"></td>
+        <td th:text="${#temporals.format(task.deadline, 'dd/MM/yyyy')}"></td>
+        <td th:text="${task.priority}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(tasks)}">
+        <td colspan="5">Chưa có công việc nào.</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
